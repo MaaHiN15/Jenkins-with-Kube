@@ -11,8 +11,11 @@ pipeline{
         }
         stage("Docker check"){
             steps{
-                sh "docker --version"   
-                sh "docker ps"
+                withCredentials([usernamePassword(credentialsId: 'docker-credential', usernameVariable: 'USER', passwordVariable: 'PASS')]){
+                    sh "docker build -t maahin/maahin-app:1.0 ."
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                    sh "docker push maahin/maahin-app:1.0"
+                }
                 }
             }
         }
