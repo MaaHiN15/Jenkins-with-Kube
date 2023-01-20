@@ -4,8 +4,8 @@ pipeline{
         stage("Python check"){
             steps{
                 script{
-                    sh "python --version"
-                    sh "python app.py"
+                    sh "python3 --version"
+                    sh "python3 app.py"
                 }
             }
         }
