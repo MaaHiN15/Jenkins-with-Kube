@@ -13,6 +13,7 @@ pipeline{
             steps{
                 scirpt{
                     sh "docker --version"   
+                    sh "docker ps"
                 }
             }
         }
