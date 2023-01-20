@@ -11,11 +11,9 @@ pipeline{
         }
         stage("Docker check"){
             steps{
-                scirpt{
-                    sh "docker --version"   
-                    sh "docker ps"
+                sh "docker --version"   
+                sh "docker ps"
                 }
             }
         }
     }
-}
