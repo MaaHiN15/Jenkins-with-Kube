@@ -26,6 +26,10 @@ pipeline{
 
                     // Increment the patch version number
                     def versionParts = currentVersion.split('.')
+                    
+                    if (versionParts.length != 3) {
+                        error("Invalid version format: ${currentVersion}. Version should be in the format MAJOR.MINOR.PATCH.")
+                    }
                     def patchVersion = versionParts[2].toInteger() + 1
                     def newVersion = "${versionParts[0]}.${versionParts[1]}.${patchVersion}"
 
