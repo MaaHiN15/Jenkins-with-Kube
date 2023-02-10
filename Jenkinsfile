@@ -40,8 +40,8 @@ pipeline{
         stage("Docker push"){
             steps {
                 script {
-                    sh "docker build -t maahin/maahin-app:env.DOCKER_IMAGE_TAG ."
-                    sh "docker push maahin/maahin-app:env.DOCKER_IMAGE_TAG"
+                    sh "docker build -t maahin/maahin-app:${env.DOCKER_IMAGE_TAG} ."
+                    sh "docker push maahin/maahin-app:${env.DOCKER_IMAGE_TAG}"
                     sh "echo Image build and Pushed to Repo"
                 }
             } 
