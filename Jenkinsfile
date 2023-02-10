@@ -9,10 +9,11 @@ pipeline{
                 }
             }
         }
-        stage("Docker check"){
+        stage("Docker login"){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'docker-credential', usernameVariable: 'USER', passwordVariable: 'PASS')]){
                     sh "echo $PASS | docker login -u $USER --password-stdin"
+                    sh "echo Docker Login succeed"
                 }
                 }
             }
@@ -32,6 +33,7 @@ pipeline{
                 script {
                     sh "docker build -t maahin/maahin-app:$newVersion ."
                     sh "docker push maahin/maahin-app:$newVersion"
+                    sh "echo Image build and Pushed to Repo"
                 }
             } 
         }
