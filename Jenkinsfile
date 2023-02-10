@@ -36,5 +36,18 @@ pipeline{
                 }
             } 
         }
+        stages {
+        stage('Kubernetes Login') {
+            steps {
+                withCredentials([file(credentialsId: 'k8s-config', fileVariable: 'KUBECONFIG')]) {
+                    sh 'kubectl --kubeconfig=$KUBECONFIG get nodes'
+                }
+            }
+        }
+//         stage('Deploy to Kubernetes') {
+//             steps {
+//                 sh 'kubectl --kubeconfig=$KUBECONFIG apply -f deployment.yml'
+//             }
+//         }
     }
 }
