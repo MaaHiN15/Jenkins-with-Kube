@@ -44,10 +44,5 @@ pipeline{
                 }
             }
         }
-//         stage('Deploy to Kubernetes') {
-//             steps {
-//                 sh 'kubectl --kubeconfig=$KUBECONFIG apply -f deployment.yml'
-//             }
-//         }
     }
 }
