@@ -20,24 +20,10 @@ pipeline{
         stage('Auto Version Increment') {
             steps {
                 script {
-                    // Read the current version number from version.txt
                     def versionFile = 'version.txt'
                     def currentVersion = readFile(versionFile).trim()
-
-                    // Increment the patch version number
-                    def versionParts = currentVersion.split('.')
-                    
-                    if (versionParts.length != 3) {
-                        error("Invalid version format: ${currentVersion}. Version should be in the format MAJOR.MINOR.PATCH.")
-                    }
-                    def patchVersion = versionParts[2].toInteger() + 1
-                    def newVersion = "${versionParts[0]}.${versionParts[1]}.${patchVersion}"
-
-                    // Write the new version number to version.txt
-                    writeFile file: versionFile, text: "${newVersion}\n"
-
-                    // Set an environment variable with the new version number
-                    env.DOCKER_IMAGE_TAG = newVersion
+                    sh "echo ${currentVersion} > version.txt"
+                    env.DOCKER_IMAGE_TAG = "${currentVersion}-${env.BUILD_ID}"
                 }
             }
         }
