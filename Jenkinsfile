@@ -38,11 +38,8 @@ pipeline{
         }
         stage('Kubernetes Login') {
             steps {
-                withCredentials([file(credentialsId: 'k8s-config', fileVariable: 'KUBECONFIG')]) {
-                    sh 'kubectl --kubeconfig=$KUBECONFIG get nodes'
-                }
+                sh 'microk8s kubectl get nodes'
             }
         }
-
     }
 }
