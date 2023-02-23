@@ -41,5 +41,22 @@ pipeline{
                 sh 'microk8s kubectl get nodes'
             }
         }
+        stage("Helm Check"){
+            steps{
+                script{
+                    sh "helm version"
+                }
+            }
+        }
+        stage("Prometheus Installation"){
+            steps{
+                script{
+                    sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
+                    sh "helm repo update"
+                    sh "microk8s kubectl create namespace monitoring"
+                    sh "helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring"
+                }
+            }
+        }
     }
 }
