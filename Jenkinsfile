@@ -54,7 +54,7 @@ pipeline{
                     sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
                     sh "helm repo update"
                     sh "microk8s kubectl create namespace monitoring"
-                    sh "helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring"
+                    sh "microk8s helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring"
                 }
             }
         }
